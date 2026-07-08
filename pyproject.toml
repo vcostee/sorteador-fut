@@ -1,0 +1,18 @@
+[project]
+name = "sorteador-fut"
+version = "1.0.0"
+description = "Sorteador de times"
+requires-python = ">=3.10"
+
+dependencies = [
+    "flet"
+]
+
+[tool.flet]
+org = "com.vitor"
+product = "Sorteador Fut"
+company = "Vitor"
+copyright = "2026"
+
+[tool.flet.app]
+path = "."
