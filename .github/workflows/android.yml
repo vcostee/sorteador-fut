@@ -3,6 +3,11 @@ name: Build Android APK
 on:
   workflow_dispatch:
 
+env:
+  UV_PYTHON: "3.11"
+  PYTHONUTF8: "1"
+  FLET_CLI_NO_RICH_OUTPUT: "1"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,37 +16,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: "17"
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "3.35.4"
-          cache: true
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install flet
-
-      - name: Check Flutter
-        run: flutter doctor
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v6
 
       - name: Build APK
         run: |
-          flet build apk --no-rich-output
+          uv run flet build apk --yes --verbose
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: apk
-          path: build/apk/*.apk
+          name: Sorteador-Fut-APK
+          path: build/apk
+          if-no-files-found: error
