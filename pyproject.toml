@@ -1,7 +1,8 @@
 [project]
 name = "sorteador-fut"
 version = "1.0.0"
-description = "Sorteador de times"
+description = "Aplicativo para sorteio de times de futebol"
+readme = "README.md"
 requires-python = ">=3.11"
 
 dependencies = [
