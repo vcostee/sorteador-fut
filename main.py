@@ -48,13 +48,15 @@ def main(page: ft.Page):
 
         page.update()
 
-    def compartilhar(e):
+    async def compartilhar(e):
         if not resultado.value:
             return
 
         texto = urllib.parse.quote(resultado.value)
 
-        page.launch_url(
+        launcher = ft.UrlLauncher()
+
+        await launcher.launch_url(
             f"https://wa.me/?text={texto}"
         )
 
@@ -64,12 +66,12 @@ def main(page: ft.Page):
         entrada,
         ft.Row(
             [
-                ft.ElevatedButton(
+                ft.Button(
                     "🎲 Sortear",
                     icon=ft.Icons.CASINO,
                     on_click=sortear,
                 ),
-                ft.ElevatedButton(
+                ft.Button(
                     "📲 Compartilhar",
                     icon=ft.Icons.SHARE,
                     on_click=compartilhar,
@@ -81,4 +83,4 @@ def main(page: ft.Page):
     )
 
 
-ft.app(main)
+ft.run(main)
